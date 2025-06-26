@@ -2,8 +2,9 @@
 Installation test for BabyBench. Checks required libraries, MIMo, simulations, and rendering
 """
 
+
 def main():
-    
+
     print("Starting BabyBench installation test")
 
     print("Checking libraries... ")
@@ -13,7 +14,8 @@ def main():
         import gymnasium as gym
         import time
         import argparse
-        #import cv2
+
+        # import cv2
         import mujoco
         import yaml
     except ImportError as e:
@@ -34,13 +36,23 @@ def main():
 
     print("Checking config... ")
     try:
-        with open('examples/config_test_installation.yml') as f:
+        with open("examples/config_test_installation.yml") as f:
             config = yaml.safe_load(f)
-            for param in ['save_dir','behavior','scene','actuation_model',
-                          'max_episode_steps','frame_skip','render_size','save_logs_every']:
+            for param in [
+                "save_dir",
+                "behavior",
+                "scene",
+                "actuation_model",
+                "max_episode_steps",
+                "frame_skip",
+                "render_size",
+                "save_logs_every",
+            ]:
                 _ = config[param]
     except Exception as e:
-        print(f"Please make sure the necessary parameters are defined in the config. Missing: {param}")
+        print(
+            f"Please make sure the necessary parameters are defined in the config. Missing: {param}"
+        )
         print(e)
         exit(1)
 
@@ -74,7 +86,11 @@ def main():
 
     print("Checking video rendering... ")
     try:
-        bb_utils.evaluation_video(images, save_name=f'{config["save_dir"]}/videos/test_installation.avi', resolution=(480,480))
+        bb_utils.evaluation_video(
+            images,
+            save_name=f'{config["save_dir"]}/videos/test_installation.avi',
+            resolution=(480, 480),
+        )
     except Exception as e:
         print("Error creating video")
         print(e)
@@ -82,5 +98,6 @@ def main():
 
     print("Installation test successful!")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
